@@ -58,6 +58,14 @@ chrome.webRequest.onBeforeRequest.addListener(function(info) {
       var uri = uri.scheme() + "://" + uris[key];
       uri = uri.replace("###", query["q"]);
 
+      if (key == "scholar.lmgtfy.com") {
+        // scholar.lmgtfy.com is a special case as their are two buttons that the user can push.
+        //  Determining which was clicked is decided by the 'l' query parameter.
+        if ("l" in query && query["l"] === "1") {
+          uri += "&as_sdt=2%2C47"
+        }
+      }
+
       console.log("Redirecting to " + uri + "...");
       return { redirectUrl: uri };
 
