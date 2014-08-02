@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+
+  "name": "lmgtfy Redirect",
+  "description": "A Google Chrome extension that automatically redirects lmgtfy links to their respective search engines",
+  "version": "1.0",
+
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.lmgtfy.com",
+        "https://www.lmddgtfy.net",
+        "https://www.lmsptfy.com"
+      ],
+      "js": ["lmgtfy.js"]
+    }
+  ],
+}
