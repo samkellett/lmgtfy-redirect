@@ -1,6 +1,18 @@
+var languages = {
+  "en": "com",
+  "ru": "ru",
+  "de": "de",
+  "pt-br": "com.br",
+  "fr": "fr",
+  "pl": "pl",
+  "zh-tw": "com.tw",
+  "nl": "nl",
+  "es": "es"
+}
+
 var uris = {
   // Google:
-  "lmgtfy.com": "google.com/search?q={query}",
+  "lmgtfy.com": "google.{com}/search?q={query}",
   "images.lmgtfy.com": "google.com/search?tbm=isch&q={query}",
   "maps.lmgtfy.com": "google.com/maps/preview?q={query}",
   "video.lmgtfy.com": "google.com?tbm=vid&q={query}",
@@ -12,17 +24,6 @@ var uris = {
   "books.lmgtfy.com": "google.com/search?tbm=bks&q={query}",
   "finance.lmgtfy.com": "google.com/finance?q={query}",
   "scholar.lmgtfy.com": "scholar.google.com/scholar?q={query}",
-
-  // Other languges:
-  "en.lmgtfy.com": "google.com/search?q={query}",
-  "ru.lmgtfy.com": "google.ru/search?q={query}",
-  "de.lmgtfy.com": "google.de/search?q={query}",
-  "pt-br.lmgtfy.com": "google.com.br/search?q={query}",
-  "fr.lmgtfy.com": "google.fr/search?q={query}",
-  "pl.lmgtfy.com": "google.pl/search?q={query}",
-  "zh-tw.lmgtfy.com": "google.com.tw/search?q={query}",
-  "nl.lmgtfy.com": "google.nl/search?q={query}",
-  "es.lmgtfy.com": "google.es/search?q={query}",
 
   // Other sites:
   "bing.lmgtfy.com": "bing.com/search?q={query}",
@@ -44,7 +45,15 @@ chrome.webRequest.onBeforeRequest.addListener(function(info) {
     console.log("Hello from lmgtfy Redirect.");
     console.log("Got request: " + info.url);
 
-    if (from.subdomain() == "www") {
+    var suffix = languages["en"];
+    if (from.subdomain() in languages) {
+      // Change suffix is using another language
+      suffix = languages[from.subdomain()];
+      console.log("Using tld: " + suffix);
+
+      // ..and clear it..
+      from.subdomain("");
+    } else if (from.subdomain() == "www") {
       // If www is there then remove it:
       from.subdomain("");
     }
@@ -58,7 +67,10 @@ chrome.webRequest.onBeforeRequest.addListener(function(info) {
         return {};
       }
 
-      var to = URITemplate(from.scheme() + "://" + uris[key]).expand({ query: query["q"] });
+      var to = URITemplate(from.scheme() + "://" + uris[key]).expand({
+        com: suffix,
+        query: query["q"]
+      });
 
       if (key == "scholar.lmgtfy.com") {
         // scholar.lmgtfy.com is a special case as their are two buttons that the user can push.
