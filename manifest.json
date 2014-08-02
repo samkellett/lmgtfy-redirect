@@ -5,16 +5,19 @@
   "description": "A Google Chrome extension that automatically redirects lmgtfy links to their respective search engines",
   "version": "1.0",
 
-  "content_scripts": [
-    {
-      "matches": [
-        "*://*.lmgtfy.com/*",
-        "*://*.lmbtfy.com/*",
-        "*://*.lmddgtfy.net/*",
-        "*://*.lmsptfy.com/*",
-        "*://*.lmstfy.com/*"
-      ],
-      "js": ["lmgtfy.js"]
-    }
-  ]
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.lmgtfy.com/*",
+    "*://*.lmbtfy.com/*",
+    "*://*.lmddgtfy.net/*",
+    "*://*.lmsptfy.com/*",
+    "*://*.lmstfy.com/*"
+  ],
+
+  "background": {
+    "scripts": [
+      "lmgtfy.js"
+    ]
+  }
 }

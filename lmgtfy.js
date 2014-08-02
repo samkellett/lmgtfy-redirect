@@ -1,4 +1,6 @@
-(function() {
+chrome.webRequest.onBeforeRequest.addListener(function(info) {
+    console.log("Got request: " + info.url + "\n Going to redirect");
+
   var urls = {
     // Google:
     "lmgtfy.com": "google.com/search?q=###",
@@ -39,4 +41,13 @@
   console.log("Hello from lmgtfy Redirect.");
   console.log(window.location);
 
-})();
+
+    // return {redirectUrl: chrome.extension.getURL("redirect.html")};
+  },
+  {urls: ["*://*.lmgtfy.com/"]},
+  ["blocking"]
+);
+
+// (function() {
+
+// })();
