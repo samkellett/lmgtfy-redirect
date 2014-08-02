@@ -17,6 +17,7 @@
 
   "background": {
     "scripts": [
+      "uri/src/URI.min.js",
       "lmgtfy.js"
     ]
   }

@@ -16,6 +16,7 @@ var urls = {
   //  -> http://scholar.google.com/scholar?as_sdt=2%2C47&q=sam
 
   // Other languges:
+  "en.lmgtfy.com": "google.com/search?q=###",
   "ru.lmgtfy.com": "google.ru/search?q=###",
   "de.lmgtfy.com": "google.de/search?q=###",
   "pt-br.lmgtfy.com": "google.com.br/search?q=###",
@@ -38,6 +39,17 @@ var urls = {
 chrome.webRequest.onBeforeRequest.addListener(function(info) {
     console.log("Hello from lmgtfy Redirect.");
     console.log("Got request: " + info.url + "... Going to redirect");
+
+    console.log(info);
+    console.log(chrome.webRequest);
+
+    var uri = new URI(info.url);
+    if (uri.subdomain() == "www") {
+      // If www is there then remove it:
+      uri.subdomain("");
+    }
+
+    console.log(uri.hostname());
   },
   {
     urls: [
