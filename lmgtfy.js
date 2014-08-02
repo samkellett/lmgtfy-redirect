@@ -1,4 +1,4 @@
-var uris = {
+var urls = {
   // Google:
   "lmgtfy.com": "google.com/search?q=###",
   "images.lmgtfy.com": "google.com/search?tbm=isch&q=###",
@@ -16,7 +16,7 @@ var uris = {
   //  -> http://scholar.google.com/scholar?as_sdt=2%2C47&q=sam
 
   // Other languges:
-  "en.lmgtfy.com": uris["lmgtfy.com"],
+  "en.lmgtfy.com": "google.com/search?q=###",
   "ru.lmgtfy.com": "google.ru/search?q=###",
   "de.lmgtfy.com": "google.de/search?q=###",
   "pt-br.lmgtfy.com": "google.com.br/search?q=###",
@@ -28,7 +28,7 @@ var uris = {
 
   // Other sites:
   "bing.lmgtfy.com": "bing.com/search?q=###",
-  "lmbtfy.com": uris["bing.lmgtfy.com"],
+  "lmbtfy.com": "bing.com/search?q=###",
   "snopes.lmgtfy.com": "search.atomz.com/search/?sp-a=00062d45-sp00000000&sp-q=###",
   "wikipedia.lmgtfy.com": "en.wikipedia.org/wiki/Special:Search?search=###",
   "lmstfy.com": "twitter.com/search?q=###",
