@@ -46,9 +46,6 @@ chrome.webRequest.onBeforeRequest.addListener(function(info) {
     console.log("Hello from lmgtfy Redirect.");
     console.log("Got request: " + info.url);
 
-    console.log(info);
-    console.log(chrome.webRequest);
-
     if (uri.subdomain() == "www") {
       // If www is there then remove it:
       uri.subdomain("");
@@ -57,7 +54,6 @@ chrome.webRequest.onBeforeRequest.addListener(function(info) {
     var key = uri.hostname();
     if (key in uris) {
       var query = uri.search(true);
-      console.log(query);
 
       var uri = uri.scheme() + "://" + uris[key];
       uri = uri.replace("###", query["q"]);
@@ -67,8 +63,8 @@ chrome.webRequest.onBeforeRequest.addListener(function(info) {
 
     } else {
       console.log("Unknown host: " + key);
+      return {};
     }
-
   },
   {
     urls: [
