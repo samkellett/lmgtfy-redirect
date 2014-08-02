@@ -12,7 +12,7 @@ var languages = {
 
 var uris = {
   // Google:
-  "lmgtfy.com": "google.{com}/search?q={query}",
+  "lmgtfy.com": "google.{com}/search?q={query}&{&ext*}",
   "images.lmgtfy.com": "google.com/search?tbm=isch&q={query}",
   "maps.lmgtfy.com": "google.com/maps/preview?q={query}",
   "video.lmgtfy.com": "google.com?tbm=vid&q={query}",
@@ -23,7 +23,7 @@ var uris = {
   "profiles.lmgtfy.com": "plus.google.com/s/{query}/people",
   "books.lmgtfy.com": "google.com/search?tbm=bks&q={query}",
   "finance.lmgtfy.com": "google.com/finance?q={query}",
-  "scholar.lmgtfy.com": "scholar.google.com/scholar?q={query}",
+  "scholar.lmgtfy.com": "scholar.google.com/scholar?q={query}{&ext*}",
 
   // Other sites:
   "bing.lmgtfy.com": "bing.com/search?q={query}",
@@ -64,28 +64,36 @@ chrome.webRequest.onBeforeRequest.addListener(function(info) {
       if (!("q" in query)) {
         // Nothing searched for (yet!)
         console.log("No query to redirect... exiting.");
-        return {};
+        return;
       }
 
-      var to = URITemplate(from.scheme() + "://" + uris[key]).expand({
-        com: suffix,
-        query: query["q"]
-      });
+      var to = URITemplate(from.scheme() + "://" + uris[key]);
+      var ext;
 
-      if (key == "scholar.lmgtfy.com") {
-        // scholar.lmgtfy.com is a special case as their are two buttons that the user can push.
-        //  Determining which was clicked is decided by the 'l' query parameter.
-        if (query["l"] === "1") {
-          to.addQuery("as_sdt", "2,47")
+      // Special cases for when there is more than one button the user can click.
+      //  Determining which was clicked is decided by the 'l' query parameter.
+      if (query["l"] === "1") {
+        if (key == "lmgtfy.com") {
+          // For the "I'm Feeling Lucky" button
+          ext = {"btnI": "I"};
+        } else if (key == "scholar.lmgtfy.com") {
+          // For the "books" button or something...
+          ext = {"as_sdt": "2,47"};
         }
       }
+
+      to = to.expand({
+        com: suffix,
+        query: query["q"],
+        ext: ext
+      });
 
       console.log("Redirecting to " + to + "...");
       return { redirectUrl: to };
 
     } else {
       console.log("Unknown host: " + key);
-      return {};
+      return;
     }
   },
   {
