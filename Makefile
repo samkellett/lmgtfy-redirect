@@ -1,5 +1,12 @@
+NAME=lmgtfy-redirect
+ICONS=chrome/icons/icon128.png chrome/icons/icon48.png chrome/icons/icon16.png
+FILES=chrome/manifest.json chrome/lmgtfy.js chrome/uri/src/URI.min.js $(ICONS)
 
 all: package
 
-package: manifest.json lmgtfy.js uri/src/URI.min.js
-	zip -u lmgtfy.zip manifest.json lmgtfy.js uri/src/URI.min.js
+clean:
+	rm $(NAME).zip
+
+package: chrome/* 
+	touch $(NAME).zip
+	zip -ru $(NAME) chrome/
