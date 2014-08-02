@@ -12,8 +12,6 @@ var uris = {
   "books.lmgtfy.com": "google.com/search?tbm=bks&q=###",
   "finance.lmgtfy.com": "google.com/finance?q=###",
   "scholar.lmgtfy.com": "scholar.google.com/scholar?q=###",
-  // NB: http://scholar.lmgtfy.com/?q=sam&l=1
-  //  -> http://scholar.google.com/scholar?as_sdt=2%2C47&q=sam
 
   // Other languges:
   "en.lmgtfy.com": "google.com/search?q=###",
@@ -32,7 +30,7 @@ var uris = {
   "snopes.lmgtfy.com": "search.atomz.com/search/?sp-a=00062d45-sp00000000&sp-q=###",
   "wikipedia.lmgtfy.com": "en.wikipedia.org/wiki/Special:Search?search=###",
   "lmstfy.com": "twitter.com/search?q=###",
-  "lmddgtfy.com": "duckduckgo.com?q=###",
+  "lmddgtfy.net": "duckduckgo.com?q=###",
   "lmsptfty.com": "startpage.com/do/search?query=###"
 };
 
@@ -54,6 +52,10 @@ chrome.webRequest.onBeforeRequest.addListener(function(info) {
     var key = uri.hostname();
     if (key in uris) {
       var query = uri.search(true);
+      if (!("q" in query)) {
+        // Nothing searched for (yet!)
+        return {};
+      }
 
       var uri = uri.scheme() + "://" + uris[key];
       uri = uri.replace("###", query["q"]);
