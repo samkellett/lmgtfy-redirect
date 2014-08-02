@@ -1,4 +1,4 @@
-var urls = {
+var uris = {
   // Google:
   "lmgtfy.com": "google.com/search?q=###",
   "images.lmgtfy.com": "google.com/search?tbm=isch&q=###",
@@ -37,27 +37,46 @@ var urls = {
 };
 
 chrome.webRequest.onBeforeRequest.addListener(function(info) {
+    var uri = new URI(info.url);
+    if (uri.directory().indexOf("/assets") == 0) {
+      // Don't bother if this is not a main request...
+      return;
+    }
+
     console.log("Hello from lmgtfy Redirect.");
-    console.log("Got request: " + info.url + "... Going to redirect");
+    console.log("Got request: " + info.url);
 
     console.log(info);
     console.log(chrome.webRequest);
 
-    var uri = new URI(info.url);
     if (uri.subdomain() == "www") {
       // If www is there then remove it:
       uri.subdomain("");
     }
 
-    console.log(uri.hostname());
+    var key = uri.hostname();
+    if (key in uris) {
+      var query = uri.search(true);
+      console.log(query);
+
+      var uri = uri.scheme() + "://" + uris[key];
+      uri = uri.replace("###", query["q"]);
+
+      console.log("Redirecting to " + uri + "...");
+      return { redirectUrl: uri };
+
+    } else {
+      console.log("Unknown host: " + key);
+    }
+
   },
   {
     urls: [
-      "*://*.lmgtfy.com/",
-      "*://*.lmbtfy.com/",
-      "*://*.lmddgtfy.net/",
-      "*://*.lmsptfy.com/",
-      "*://*.lmstfy.com/"
+      "*://*.lmgtfy.com/*",
+      "*://*.lmbtfy.com/*",
+      "*://*.lmddgtfy.net/*",
+      "*://*.lmsptfy.com/*",
+      "*://*.lmstfy.com/*"
     ]
   },
   ["blocking"]
