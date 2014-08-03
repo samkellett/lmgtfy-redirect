@@ -1,2 +1,4 @@
+USERAGENT='User-Agent: bot/version by person'
+
 USERNAME='username'
 PASSWORD='password'

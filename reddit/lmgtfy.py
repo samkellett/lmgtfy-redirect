@@ -11,6 +11,9 @@ except ImportError, e:
 # cache = deque(maxlen = 200)
 
 def main():
+  reddit = praw.Reddit(user_agent = bot.USERAGENT)
+  reddit.login(bot.USERNAME, bot.PASSWORD)
+
   print bot.USERNAME
 
 if __name__ == '__main__':
