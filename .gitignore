@@ -1,3 +1,9 @@
+# Chrome extension
 lmgtfy-redirect.zip
 *.pem
 *.crx
+
+# Reddit bot
+lmgtfy_bot.py
+*.pyc
+
