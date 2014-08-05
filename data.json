@@ -25,12 +25,12 @@
     "finance.lmgtfy.com": "{scheme}://google.com/finance?q={query}",
     "scholar.lmgtfy.com": "{scheme}://scholar.google.com/scholar?q={query}&{ext}",
 
-    "bing.lmgtfy.com": "bing.com/search?q={query}",
-    "lmbtfy.com": "bing.com/search?q={query}",
-    "snopes.lmgtfy.com": "search.atomz.com/search/?sp-a=00062d45-sp00000000&sp-q={query}",
-    "wikipedia.lmgtfy.com": "en.wikipedia.org/wiki/Special:Search?search={query}",
-    "lmstfy.com": "twitter.com/search?q={query}",
-    "lmddgtfy.net": "duckduckgo.com?q={query}",
-    "lmsptfty.com": "startpage.com/do/search?query={query}"
+    "bing.lmgtfy.com": "{scheme}://bing.com/search?q={query}",
+    "lmbtfy.com": "{scheme}://bing.com/search?q={query}",
+    "snopes.lmgtfy.com": "{scheme}://search.atomz.com/search/?sp-a=00062d45-sp00000000&sp-q={query}",
+    "wikipedia.lmgtfy.com": "{scheme}://en.wikipedia.org/wiki/Special:Search?search={query}",
+    "lmstfy.com": "{scheme}://twitter.com/search?q={query}",
+    "lmddgtfy.net": "{scheme}://duckduckgo.com?q={query}",
+    "lmsptfty.com": "{scheme}://startpage.com/do/search?query={query}"
   }
 }
