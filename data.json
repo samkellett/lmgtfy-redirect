@@ -1,0 +1,36 @@
+{
+  "languages": {
+  "en": "com",
+  "ru": "ru",
+  "de": "de",
+  "pt-br": "com.br",
+  "fr": "fr",
+  "pl": "pl",
+  "zh-tw": "com.tw",
+  "nl": "nl",
+  "es": "es"
+  },
+
+  "uris": {
+    "lmgtfy.com": "{scheme}://google.{com}/search?q={query}&{ext}",
+    "images.lmgtfy.com": "{scheme}://google.com/search?tbm=isch&q={query}",
+    "maps.lmgtfy.com": "{scheme}://google.com/maps/preview?q={query}",
+    "video.lmgtfy.com": "{scheme}://google.com?tbm=vid&q={query}",
+    "news.lmgtfy.com": "{scheme}://news.google.com/news/search?q={query}",
+    "shopping.lmgtfy.com": "{scheme}://google.com?tbm=shop&q={query}",
+    "photos.lmgtfy.com": "{scheme}://plus.google.com/u/0/s/{query}/photos",
+    "plus.lmgtfy.com": "{scheme}://plus.google.com/s/{query}",
+    "profiles.lmgtfy.com": "{scheme}://plus.google.com/s/{query}/people",
+    "books.lmgtfy.com": "{scheme}://google.com/search?tbm=bks&q={query}",
+    "finance.lmgtfy.com": "{scheme}://google.com/finance?q={query}",
+    "scholar.lmgtfy.com": "{scheme}://scholar.google.com/scholar?q={query}&{ext}",
+
+    "bing.lmgtfy.com": "bing.com/search?q={query}",
+    "lmbtfy.com": "bing.com/search?q={query}",
+    "snopes.lmgtfy.com": "search.atomz.com/search/?sp-a=00062d45-sp00000000&sp-q={query}",
+    "wikipedia.lmgtfy.com": "en.wikipedia.org/wiki/Special:Search?search={query}",
+    "lmstfy.com": "twitter.com/search?q={query}",
+    "lmddgtfy.net": "duckduckgo.com?q={query}",
+    "lmsptfty.com": "startpage.com/do/search?query={query}"
+  }
+}
