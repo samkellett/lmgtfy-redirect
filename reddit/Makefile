@@ -1,4 +1,3 @@
-
 all: build
 
 clean:
@@ -6,3 +5,7 @@ clean:
 
 build: lmgtfy.py
 	python lmgtfy.py
+
+debug: lmgtfy.py
+	python -m pdb lmgtfy.py
+
