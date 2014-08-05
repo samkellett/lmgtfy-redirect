@@ -1,14 +1,14 @@
 {
   "languages": {
-  "en": "com",
-  "ru": "ru",
-  "de": "de",
-  "pt-br": "com.br",
-  "fr": "fr",
-  "pl": "pl",
-  "zh-tw": "com.tw",
-  "nl": "nl",
-  "es": "es"
+    "en": "com",
+    "ru": "ru",
+    "de": "de",
+    "pt-br": "com.br",
+    "fr": "fr",
+    "pl": "pl",
+    "zh-tw": "com.tw",
+    "nl": "nl",
+    "es": "es"
   },
 
   "uris": {
