@@ -22,7 +22,6 @@ url_re = 'https?://(?:www\.)?(?:(?:(?:(?:en|ru|de|pt-br|fr|pl|zh-tw|nl|es|images
 links_re = re.compile('(?:\[([^]]+)\]\((' + url_re + ')\))|((' + url_re + '))')
 cache = deque(maxlen = 2000)
 
-
 filter_empty = partial(filter, None)
 
 raw_data = open("../data.json")
@@ -60,10 +59,14 @@ def extract_links(comment):
           elif hostname == "scholar.lmgtfy.com":
             ext = {"as_sdt": "2,47"}
 
-        new_url = data["uris"][hostname].format(scheme = parsed_link.scheme, com = suffix, query = query["q"][0], ext = urllib.urlencode(ext))
+        new_url = data["uris"][hostname].format(
+          scheme = parsed_link.scheme,
+          com = suffix,
+          query = query["q"][0],
+          ext = urllib.urlencode(ext))
+
         links.append((text, link, new_url))
   return links
-
 
 def main():
   running = True
