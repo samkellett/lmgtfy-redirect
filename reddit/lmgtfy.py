@@ -28,6 +28,23 @@ raw_data = open("../data.json")
 data = json.load(raw_data)
 raw_data.close()
 
+comment = """**WAIT!**  You're about to walk into a trap...
+
+-----
+
+The following {link} were found in the above comment:
+
+{lmgtfy_links}
+
+Skip the pretension and annoying animation and use these {link} to go straight to the results you were looking for:
+
+{fixed_links}
+
+-----
+^I ^am ^the **[^lmgtfy-redirect ^bot](http://github.com/samkellett/lmgtfy-redirect)**^. ^I ^also ^come ^as **[^an ^extension](https://chrome.google.com/webstore/detail/lmgtfy-redirect/aokibefgjhbpnfaalkikepfjckdligek)**^, ^install ^me ^and ^never ^be ^caught ^out ^again!
+
+^Did ^I ^do ^something ^wrong? ^Please **[^report ^an ^issue](https://github.com/samkellett/lmgtfy-redirect/issues)** ^so ^that ^I ^can ^be ^fixed!"""
+
 def extract_links(comment):
   links = []
 
